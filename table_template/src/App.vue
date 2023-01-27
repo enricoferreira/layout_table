@@ -23,7 +23,13 @@ export default {
 };
 </script>
 <style>
-  html{
+  .overflow-auto{
     overflow: hidden;
+  }
+  .overflow-hidden{
+    overflow: hidden;
+  }
+  html{
+    overflow: overlay;
   }
 </style>

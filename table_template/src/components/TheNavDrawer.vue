@@ -36,10 +36,6 @@ export default {
                         icon: 'mdi-account-group',
                         to: 'home'
                     },
-                    // {
-                    //     title: 'Photos',
-                    //     icon: 'mdi-image'
-                    // },
                     {
                         title: 'Cargos',
                         icon: 'mdi-briefcase',
