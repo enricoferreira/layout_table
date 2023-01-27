@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer permanent>
+    <v-navigation-drawer dark color="blue-grey darken-3" mini-variant expand-on-hover app permanent >
         <v-list-item>
             <v-list-item-content>
                 <v-list-item-title class="text-h6">
