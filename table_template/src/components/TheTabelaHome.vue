@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tabela-main">
     <div class="text-h5" style="
     position: fixed;background: white; padding: 10px 0;
     width: calc(100vw - 56px - 15px);
@@ -906,3 +906,20 @@
     }),
   }
 </script>
+<style>
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      /* box-shadow: inset 0 0 6px rgba(133, 32, 32, 0.3); */
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background-color: darkgrey;
+      border-radius: 10px;
+
+      /* outline: 1px solid rgb(32, 106, 180); */
+    }
+</style>
