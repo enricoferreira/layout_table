@@ -32,4 +32,8 @@ export default {
   html{
     overflow: overlay;
   }
+  td, tr, th, table{
+    border: none;
+    border-spacing: 0ch;
+  }
 </style>

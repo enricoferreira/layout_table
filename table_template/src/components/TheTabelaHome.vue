@@ -2,7 +2,7 @@
   <div class="tabela-main">
     <div class="text-h5" style="
     position: fixed;background: white; padding: 10px 0;
-    width: calc(100vw - 56px - 15px);
+    width: calc(100vw - 56px - 6px);
 ">
       <div class="px-2 d-flex align-center">
         Colaboradores
@@ -32,45 +32,47 @@
         </v-tabs>
       </div>
     </div>
-    <div class="content-home px-2" :class="tabs == 'tabela' ? 'tabela-app' : ''">
+    <div class="content-home px-0" @scroll="teste($event)" :class="tabs == 'tabela' ? 'tabela-app' : ''">
       <table v-if="tabs == 'tabela'" style="width: 100%;">
-        <thead>
-          <tr>
-            <th class="text-start white" style="    position: sticky;
+        <thead :class="shadow ? 'shadow-header' : ''" style=";position: sticky;
+    top: 3px;">
+          <tr style=";position: sticky;
+    top: 3px;">
+            <th class="text-left white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
     top: 3px;">Nome</th>
-            <th class="text-start white" style="    position: sticky;
+            <th class="text-left white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
     top: 3px;">Email</th>
-            <th class="text-start white" style="    position: sticky;
+            <th class="text-left white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
     top: 3px;">Cargo</th>
-            <th class="text-start white" style="    position: sticky;
+            <th class="text-left white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
     top: 3px;">Perfil</th>
-            <th class="text-start white" style="    position: sticky;
+            <th class="text-left white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
     top: 3px;">Últ Acesso</th>
-    <th class="text-start white" style="    position: sticky;
+            <th class="text-left white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
     top: 3px;">Qtd Acesso</th>
-    <th class="text-start white" style="    position: sticky;
+            <th class="text-left white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
     top: 3px;">Liberado/ bloq</th>
-    <th class="text-start white" style="    position: sticky;
+            <th class="text-left white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
     top: 3px;">Lojas</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="usu in usuarios" :key="usu.id">
-            <td>{{usu.name}}</td>
-            <td>{{usu.email}}</td>
-            <td>{{usu.cargo}}</td>
-            <td>{{usu.perfil_nome}}</td>
-            <td>{{usu.data_ult_acesso}}</td>
-            <td>{{usu.qtd_acesso}}</td>
-            <td>{{usu.status_acesso}}</td>
-            <td>{{usu.num_permissao}}</td>
+          <tr class="text-body-2" v-for="usu in usuarios.slice(0,100)" :key="usu.id">
+            <td class="text-left py-2 px-2 text-truncate" style="max-width: 200px;width: 200px">{{usu.name}}</td>
+            <td class="text-left py-2 px-2 text-truncate" style="max-width: 200px;width: 200px">{{usu.email}}</td>
+            <td class="text-left py-2 px-2 text-truncate" style="max-width: 150px;width: 150px">{{usu.cargo}}</td>
+            <td class="text-left py-2 px-2">{{usu.perfil_nome}}</td>
+            <td class="text-left py-2 px-2">{{usu.data_ult_acesso | format_date}}</td>
+            <td class="text-left py-2 px-2">{{usu.qtd_acesso}}</td>
+            <td class="text-left py-2 px-2">{{usu.status_acesso}}</td>
+            <td class="text-left py-2 px-2">{{usu.num_permissao}}</td>
           </tr>
         </tbody>
       </table>
       <v-col cols="12" v-if="tabs == 'importar'">oaidsjasiojoiasjiaoisd</v-col>
     </div>
-    <div v-if="tabs == 'tabela'" class="py-2 white d-flex w-100 " style="position: fixed;width: calc(100vw - 56px - 15px);">
-      <div class="d-flex px-2" style="width: calc(100vw - 56px - 15px);">
+    <div v-if="tabs == 'tabela'" class="py-2 white d-flex w-100 " style="position: fixed;width: calc(100vw - 56px - 6px);">
+      <div class="d-flex px-2" style="width: calc(100vw - 56px - 6px);">
         <v-spacer></v-spacer>
         <v-pagination v-model="page" :length="6"></v-pagination>
       </div>
@@ -79,10 +81,25 @@
 </template>
 
 <script>
+import moment from 'moment';
   export default {
     name: 'HelloWorld',
-
+    filters: {
+      format_date(date){
+        return moment(date).format('DD/MM/YYYY')
+      }
+    },
+    methods: {
+      teste(e){
+        if(e.target.scrollTop > 50){
+          this.shadow = true
+        }else{
+          this.shadow = false
+        }
+      }
+    },
     data: () => ({
+      shadow: false,
       page: 1,
       tabs: 'tabela',
       usuarios: [
@@ -13070,4 +13087,11 @@
     .tabela-app{
       height: calc(100vh - 50px);
     }
+    table tr:nth-child(even){
+      background: rgb(249, 249, 249);
+    }
+    .shadow-header{
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 12px;
+    }
+    
 </style>
