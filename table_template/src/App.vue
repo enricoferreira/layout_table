@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <TheAppBar/>
+    <!-- <TheAppBar/> -->
     <TheNavDrawer/>
-    <v-main style="height: 10000px">
+    <v-main style="">
       <router-view/>
     </v-main>
   </v-app>
@@ -22,3 +22,8 @@ export default {
   }),
 };
 </script>
+<style>
+  html{
+    overflow: hidden;
+  }
+</style>

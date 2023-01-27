@@ -5,7 +5,7 @@
     width: calc(100vw - 69px);
 ">
       <div class="px-2 d-flex">
-        Cargos
+        Colaboradores
         <v-spacer></v-spacer>
         <v-btn text color="success" depressed small>
           <v-icon left>mdi-file-excel</v-icon> Excel
@@ -14,16 +14,16 @@
           <v-icon left>mdi-file</v-icon> csv
         </v-btn>
       </div> 
-      <!-- <div class="px-2">
+      <div class="px-2">
         <v-tabs>
           <v-tab>
-            aosijdaiso
+            Colaboradores
           </v-tab>
           <v-tab>
-            aosijdaiso
+            Importar
           </v-tab>
         </v-tabs>
-      </div> -->
+      </div>
       <!-- <div class="px-2"> -->
         <!-- <v-btn text color="success" depressed small>
           <v-icon left>mdi-file-excel</v-icon> Excel
@@ -33,20 +33,20 @@
         </v-btn> -->
       <!-- </div> -->
     </div>
-    <div style="padding-top: 38px; height: calc(100vh - 50px)" class="px-2">
+    <div style="padding-top: 90px; height: calc(100vh - 50px)" class="px-2">
       <table style="width: 100%;">
         <thead>
           <tr>
             <th class="text-start white" style="    position: sticky;
-    top: 40px;">Title 1</th>
+    top: 100px;">Title 1</th>
             <th class="text-start white" style="    position: sticky;
-    top: 40px;">Title 1</th>
+    top: 100px;">Title 1</th>
             <th class="text-start white" style="    position: sticky;
-    top: 40px;">Title 1</th>
+    top: 100px;">Title 1</th>
             <th class="text-start white" style="    position: sticky;
-    top: 40px;">Title 1</th>
+    top: 100px;">Title 1</th>
             <th class="text-start white" style="    position: sticky;
-    top: 40px;">Title 1</th>
+    top: 100px;">Title 1</th>
           </tr>
         </thead>
         <tbody>

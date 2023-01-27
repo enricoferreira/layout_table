@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar app color="white"  elevate-on-scroll >
+    <v-app-bar  color="white"  elevate-on-scroll >
         <div class="text-h5">
             Testando
         </div>
@@ -11,6 +11,7 @@
             <span class="mr-2">Latest Release</span>
             <v-icon>mdi-open-in-new</v-icon>
         </v-btn>
+
     </v-app-bar>
 </template>
 
