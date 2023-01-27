@@ -4,7 +4,7 @@
     position: fixed;background: white; padding: 10px 0;
     width: calc(100vw - 56px - 15px);
 ">
-      <div class="px-2 d-flex">
+      <div class="px-2 d-flex align-center">
         Colaboradores
         <v-spacer></v-spacer>
         <v-btn text color="success" depressed small>
