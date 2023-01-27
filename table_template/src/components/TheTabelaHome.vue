@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow: auto">
+  <div>
     <div class="text-h5" style="
     position: fixed;background: white; padding: 10px 0;
     width: calc(100vw - 69px);
@@ -13,6 +13,7 @@
         <v-btn class="ml-1" text color="primary" depressed small>
           <v-icon left>mdi-file</v-icon> csv
         </v-btn>
+        <v-btn color="" icon><v-icon>mdi-bell</v-icon></v-btn>
       </div> 
       <div class="px-2">
         <v-tabs v-model="tabs">
@@ -25,21 +26,21 @@
         </v-tabs>
       </div>
     </div>
-    <div style="padding-top: 95px; height: calc(100vh - 50px)" class="px-2">
+    <div style="padding-top: 95px; height: calc(100vh - 50px); overflow: auto" class="px-2">
       <v-fade-transition>
-        <table v-if="tabs == 'tabela'" style="width: 100%;">
+        <table v-if="tabs == 'tabela'" style="width: 1000px;">
           <thead>
             <tr>
               <th class="text-start white" style="    position: sticky;
-      top: 100px;">Title 1</th>
+      top: 3px;">Title 1</th>
               <th class="text-start white" style="    position: sticky;
-      top: 100px;">Title 1</th>
+      top: 3px;">Title 1</th>
               <th class="text-start white" style="    position: sticky;
-      top: 100px;">Title 1</th>
+      top: 3px;">Title 1</th>
               <th class="text-start white" style="    position: sticky;
-      top: 100px;">Title 1</th>
+      top: 3px;">Title 1</th>
               <th class="text-start white" style="    position: sticky;
-      top: 100px;">Title 1</th>
+      top: 3px;">Title 1</th>
             </tr>
           </thead>
           <tbody>
