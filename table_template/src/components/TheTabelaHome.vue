@@ -15,7 +15,7 @@
         </v-btn>
         <v-btn color="" icon><v-icon>mdi-bell</v-icon></v-btn>
       </div> 
-      <div class="px-2">
+      <div class="px-0">
         <v-tabs v-model="tabs">
           <v-tab href="#tabela">
             Colaboradores
