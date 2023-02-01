@@ -47,9 +47,9 @@
                     <div>
                       Nome
                     </div>
-                    <div @click.stop="ordenacao_sentido = ordenacao_sentido == 'cresc' ? 'desc' : 'cresc'">
-                      <v-icon @click.stop="ordenar('name', 'cresc')" size="19" class="mr-1" :color="ordenacao_sentido == 'cresc' && ordenacao_value == 'name' ? 'black' : ''">mdi-chevron-up</v-icon>
-                      <v-icon @click.stop="ordenar('name', 'desc')" size="19" :color="ordenacao_sentido == 'desc' && ordenacao_value == 'name' ? 'black' : ''">mdi-chevron-down</v-icon>
+                    <div @click.stop="ordenar('name', ordenacao_sentido == 'cresc' ? 'desc' : 'cresc')">
+                      <v-icon size="19" class="mr-1" :color="ordenacao_sentido == 'cresc' && ordenacao_value == 'name' ? 'black' : ''">mdi-chevron-up</v-icon>
+                      <v-icon size="19" :color="ordenacao_sentido == 'desc' && ordenacao_value == 'name' ? 'black' : ''">mdi-chevron-down</v-icon>
                     </div>
                   </div>
                 </th>
