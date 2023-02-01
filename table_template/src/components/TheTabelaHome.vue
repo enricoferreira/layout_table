@@ -39,49 +39,19 @@
     top: 3px;">
           <tr style=";position: sticky;
     top: 3px;">
-            <v-menu offset-y :close-on-content-click="false">
-              <template v-slot:activator="{on, attrs}">
-                <th v-bind="attrs" v-on="on" class="text-left white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
-            top: 3px;">
-                  <div class="d-flex justify-space-between">
-                    <div>
-                      Nome
-                    </div>
-                    <div @click.stop="ordenar('name', ordenacao_sentido == 'cresc' ? 'desc' : 'cresc')">
-                      <v-icon size="19" class="mr-1" :color="ordenacao_sentido == 'cresc' && ordenacao_value == 'name' ? 'black' : ''">mdi-chevron-up</v-icon>
-                      <v-icon size="19" :color="ordenacao_sentido == 'desc' && ordenacao_value == 'name' ? 'black' : ''">mdi-chevron-down</v-icon>
-                    </div>
-                  </div>
-                </th>
-              </template>
-              <v-sheet max-height="500" rounded class="px-1 py-2 pb-0 overflow-auto">
-                <v-text-field v-model="search_nome" placeholder="Pesquise por nome" dense hide-details outlined append-icon="mdi-close" @click:append="search_nome = ''"></v-text-field>
-                <v-checkbox @change="toggleTodosNomes" v-model="selecionar_todos_nomes" dense hide-details label="Selecionar todos"></v-checkbox>
-                <v-list dense>
-                  <v-virtual-scroll :items="usuarios_por_nome" :item-height="50" height="400">
-                    <template v-slot:default="{ item }">
-                      <v-list-item @click="addFilterNome(item)">
-                        <v-list-item-content>
-                          <v-list-item-title>{{ item.name }}</v-list-item-title>
-                        </v-list-item-content>
-                        <v-list-item-action class="d-flex justify-center">
-                          <input @click.prevent="addFilterNome(item)" type="checkbox" name="" id="" :checked="nomes_selected.includes(item.name)">
-                          <!-- <v-checkbox @click.prevent dense hide-details  :value="nomes_selected.includes(item.name)">
-                          </v-checkbox> -->
-                        </v-list-item-action>
-                      </v-list-item>
-                    </template>
-                  </v-virtual-scroll>
-                </v-list>
-              </v-sheet>
-            </v-menu>
             
-            <th class="text-left white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
-    top: 3px;">Email</th>
-            <th class="text-left white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
-    top: 3px;">Cargo</th>
-            <th class="text-left white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
-    top: 3px;">Perfil</th>
+            <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Nome"
+              :value_prop="'name'" :value_selected="'nomes_selected'" :items="usuarios" :value_array_selected="nomes_selected" />
+            
+            <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Email"
+              :value_prop="'email'" :value_selected="'email_selected'" :items="usuarios" :value_array_selected="email_selected" />
+            
+            <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Cargos"
+              :value_prop="'cargo'" :value_selected="'cargos_selected'" :items="usuarios" :value_array_selected="cargos_selected" />
+
+            <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Perfil"
+              :value_prop="'perfil_nome'" :value_selected="'perfil_selected'" :items="usuarios" :value_array_selected="perfil_selected" />
+            
             <th class="text-center white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
     top: 3px;">Últ Acesso</th>
             <th class="text-center white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
@@ -97,7 +67,7 @@
             <td class="text-left py-2 px-2 text-truncate" style="max-width: 200px;width: 200px">{{usu.name}}</td>
             <td class="text-left py-2 px-2 text-truncate" style="max-width: 200px;width: 200px">{{usu.email}}</td>
             <td class="text-left py-2 px-2 text-truncate" style="max-width: 150px;width: 150px">{{usu.cargo}}</td>
-            <td class="text-left py-2 px-2">{{usu.perfil_nome}}</td>
+            <td class="text-left py-2 px-2" style="min-width: 97px">{{usu.perfil_nome}}</td>
             <td class="text-center py-2 px-2">{{usu.data_ult_acesso | format_date}}</td>
             <td class="text-center py-2 px-2">{{usu.qtd_acesso}}</td>
             <td class="text-center py-2 px-2" @click.stop="usu.status_acesso = !usu.status_acesso">
@@ -124,8 +94,13 @@
 
 <script>
 import moment from 'moment';
+import TH from '../components/table/TH.vue'
+
 import usuarios from '../api/usuarios'
   export default {
+    components:{
+      TH
+    },
     name: 'HelloWorld',
     filters: {
       format_date(date){
@@ -133,14 +108,9 @@ import usuarios from '../api/usuarios'
       }
     },
     computed:{
-      usuarios_por_nome(){
-        return this.usuarios.filter(usu => {
-          return this.search_nome == '' ? true : usu.name.toLowerCase().includes(this.search_nome.toLowerCase())
-        })
-      },
       usuarios_computed_filter(){
         return this.usuarios.filter(usu => {
-          return this.nomes_selected.includes(usu.name)
+          return this.nomes_selected.includes(usu.name) && this.email_selected.includes(usu.email)
         }).sort((a, b) => {
           const a_format = a[this.ordenacao_value]
           const b_format = b[this.ordenacao_value]
@@ -160,21 +130,21 @@ import usuarios from '../api/usuarios'
         this.ordenacao_value = value;
         this.ordenacao_sentido = sentido;
       },
-      toggleTodosNomes(){
-        if(!this.selecionar_todos_nomes){
-          this.nomes_selected = []
+      toggleTodos(selecionar_todos, value_selected, value_prop){
+        if(!selecionar_todos){
+          this[value_selected] = []
         }else{
-          this.nomes_selected = this.usuarios.map(usu => usu.name)
+          this[value_selected] = this.usuarios.map(item => item[value_prop])
         }
       },
-      addFilterNome(usu){
-        const index_find = this.nomes_selected.findIndex(item => {
-          return  item == usu.name
+      addFilter(item, value_selected, value_prop){
+        const index_find = this[value_selected].findIndex(item_v => {
+          return item_v == item[value_prop]
         });
         if(index_find != -1){
-          this.nomes_selected.splice(index_find, 1)
+          this[value_selected].splice(index_find, 1)
         }else{
-          this.nomes_selected.push(usu.name)
+          this[value_selected].push(item[value_prop])
         }
       },
       activeShadow(e){
@@ -186,11 +156,12 @@ import usuarios from '../api/usuarios'
       }
     },
     data: () => ({
-      // filtro por nome
+      // filtros
+      email_selected: usuarios.map(usu => usu.email),
       nomes_selected: usuarios.map(usu => usu.name),
-      selecionar_todos_nomes: true,
-      search_nome: '',
-
+      cargos_selected: usuarios.map(usu => usu.cargo),
+      perfil_selected: usuarios.map(usu => usu.perfil_nome),
+      
       // Ordenacao
       ordenacao_value: '',
       ordenacao_sentido: 'cresc',
