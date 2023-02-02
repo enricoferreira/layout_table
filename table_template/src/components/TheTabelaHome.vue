@@ -41,7 +41,7 @@
     top: 3px;">
             
             <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Nome"
-              :value_prop="'name'" :value_selected="'nomes_selected'" :items="usuarios" :value_array_selected="nomes_selected" />
+              :type_prop="'String'" :value_prop="'name'" :value_selected="'nomes_selected'" :items="usuarios" :value_array_selected="nomes_selected" />
             
             <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Email"
               :value_prop="'email'" :value_selected="'email_selected'" :items="usuarios" :value_array_selected="email_selected" />
@@ -52,13 +52,13 @@
             <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Perfil"
               :value_prop="'perfil_nome'" :value_selected="'perfil_selected'" :items="usuarios" :value_array_selected="perfil_selected" />
 
-            <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Últ acesso"
-            :value_prop="'data_ult_acesso'" :value_selected="'ult_acesso_selected'" :items="usuarios" :value_array_selected="ult_acesso_selected" />
+            <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Últ.Acesso"
+            :type_prop="'Date'" :value_prop="'data_ult_acesso'" :value_selected="'ult_acesso_selected'" :items="usuarios" :value_array_selected="ult_acesso_selected" />
             
-            <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Qtd Acesso"
+            <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Qtd.Acesso"
             :value_prop="'qtd_acesso'" :value_selected="'qtd_acesso_selected'" :items="usuarios" :value_array_selected="qtd_acesso_selected" />
 
-            <th class="text-center white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
+            <th class="text-center white py-2 px-2 text-truncate" style="color: #474747; font-size: 16px;position: sticky;
     top: 3px;">Liberado/ bloq</th>
     
             <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Lojas"
@@ -72,14 +72,14 @@
             <td class="text-left py-2 px-2 text-truncate" style="max-width: 150px;width: 150px">{{usu.cargo}}</td>
             <td class="text-left py-2 px-2 text-truncate" style="min-width: 97px">{{usu.perfil_nome}}</td>
             <td class="text-center py-2 px-2" style="min-width: 137px">{{usu.data_ult_acesso | format_date}}</td>
-            <td class="text-center py-2 px-2" style="min-width: 137px">{{usu.qtd_acesso}}</td>
+            <td class="text-center py-2 px-2" style="min-width: 147px">{{usu.qtd_acesso}}</td>
             <td class="text-center py-2 px-2" @click.stop="usu.status_acesso = !usu.status_acesso">
               <input :checked="usu.status_acesso == 1" type="checkbox" name="" id="" :value="usu.status_acessso">
               <!-- <div class="d-flex justify-center" style="width: 100%">
                 <v-checkbox dense hide-details class="mt-0" v-model="usu.status_acesso"></v-checkbox>
               </div> -->
             </td>
-            <td class="text-center py-2 px-2">{{usu.num_permissao}}</td>
+            <td style="min-width: 100px" class="text-center py-2 px-2">{{usu.num_permissao}}</td>
           </tr>
         </tbody>
       </table>

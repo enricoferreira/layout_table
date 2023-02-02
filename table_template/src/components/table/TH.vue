@@ -22,7 +22,8 @@
             <template v-slot:default="{ item }">
                 <v-list-item @click="addFilter(item)">
                 <v-list-item-content>
-                    <v-list-item-title>{{ item == '' || item == null ? '(vazio)' : item}}</v-list-item-title>
+                    <v-list-item-title v-if="type_prop != 'Date'">{{ item == '' || item == null ? '(vazio)' : item}}</v-list-item-title>
+                    <v-list-item-title v-else>{{ item == '' || item == null ? '(vazio)' : item | format_date}}</v-list-item-title>
                 </v-list-item-content>
                 <v-list-item-action class="d-flex justify-center">
                     <input @click.prevent="addFilter(item)" type="checkbox" name="" id="" :checked="isChecked(item)">
@@ -38,8 +39,10 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
-    props: ['ordenacao_value', 'ordenacao_sentido', 'nome_coluna', 'value_selected', 'value_prop', 'items', 'value_array_selected'],
+    props: ['ordenacao_value', 'ordenacao_sentido', 'nome_coluna', 'value_selected', 'value_prop', 'items', 'value_array_selected', 'type_prop'],
     data(){
         return{
             search: '',
@@ -65,6 +68,11 @@ export default {
         },
         validItem(item){
             return (item[this.value_prop] != null && item[this.value_prop] != '')
+        }
+    },
+    filters:{
+        format_date(date){
+            return moment(date).format('DD/MM/YY HH:mm')
         }
     },
     computed: {
