@@ -157,10 +157,10 @@ import usuarios from '../api/usuarios'
     },
     data: () => ({
       // filtros
-      email_selected: usuarios.map(usu => usu.email),
-      nomes_selected: usuarios.map(usu => usu.name),
-      cargos_selected: usuarios.map(usu => usu.cargo),
-      perfil_selected: usuarios.map(usu => usu.perfil_nome),
+      email_selected: [...new Set(usuarios.map(usu => usu.email))],
+      nomes_selected: [...new Set(usuarios.map(usu => usu.name))],
+      cargos_selected: [...new Set(usuarios.map(usu => usu.cargo))],
+      perfil_selected: [...new Set(usuarios.map(usu => usu.perfil_nome))],
       
       // Ordenacao
       ordenacao_value: '',

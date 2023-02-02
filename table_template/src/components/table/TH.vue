@@ -69,22 +69,11 @@ export default {
     },
     computed: {
         computed_items(){
-            return [...new Set(this.items.map(item => item[this.value_prop])
+            const items = [...new Set(this.items.map(item => item[this.value_prop])
                 .filter(item => {
                     return this.search == '' ? true : item.toLowerCase().includes(this.search.toLowerCase())
                 }))]
-            const filtrados = Array.from(new Set(this.items.map(item => item[this.value_prop])))
-                .map(item => {
-                    return this.items.find(i_v => {
-                        return item == i_v[this.value_prop]
-                    })
-                })
-            return [...new Set(filtrados.filter(item => {
-                if(!this.validItem(item)){
-                    return false
-                }
-                return this.search == '' ? true : item[this.value_prop].toLowerCase().includes(this.search.toLowerCase())
-            }))]
+                return items
         },
     }
 }
