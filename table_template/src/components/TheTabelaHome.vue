@@ -84,7 +84,7 @@
     </div>
     <div v-if="tabs == 'tabela'" class="py-2 white d-flex w-100 " style="position: fixed;width: calc(100vw - 56px - 6px);">
       <div class="d-flex px-2 align-center" style="width: calc(100vw - 56px - 6px);">
-        <span class="text-body-2">344 resultados</span>
+        <span class="text-body-2">{{usuarios.length}} resultados</span>
         <v-spacer></v-spacer>
         <v-pagination v-model="page" :length="6"></v-pagination>
       </div>
@@ -177,29 +177,5 @@ import usuarios from '../api/usuarios'
   }
 </script>
 <style>
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      /* box-shadow: inset 0 0 6px rgba(133, 32, 32, 0.3); */
-    }
-    ::-webkit-scrollbar-thumb {
-      background-color: darkgrey;
-      border-radius: 10px;
-    }
-    .content-home{
-      padding-top: 101px;
-      overflow: auto;
-    }
-    .tabela-app{
-      height: calc(100vh - 50px);
-    }
-    table tr:nth-child(even){
-      background: rgb(249, 249, 249);
-    }
-    .shadow-header{
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 12px;
-    }
-    
+@import '../styles/table_home.css';
 </style>

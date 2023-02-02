@@ -22,7 +22,7 @@
             <template v-slot:default="{ item }">
                 <v-list-item @click="addFilter(item)">
                 <v-list-item-content>
-                    <v-list-item-title>{{ item }}</v-list-item-title>
+                    <v-list-item-title>{{ item == '' || item == null ? '(vazio)' : item}}</v-list-item-title>
                 </v-list-item-content>
                 <v-list-item-action class="d-flex justify-center">
                     <input @click.prevent="addFilter(item)" type="checkbox" name="" id="" :checked="isChecked(item)">
