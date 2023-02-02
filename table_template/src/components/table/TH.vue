@@ -16,7 +16,7 @@
         </template>
         <v-sheet max-height="500" rounded class="px-1 py-2 pb-0 overflow-auto">
         <v-text-field v-model="search" placeholder="Pesquise por " dense hide-details outlined append-icon="mdi-close" @click:append="search = ''"></v-text-field>
-        <v-checkbox @change="toggleTodos" v-model="selecionar_todos" dense hide-details label="Selecionar todos"></v-checkbox>
+        <v-checkbox @change="toggleTodos" v-model="selecionar_todos" dense hide-details :label="selecionar_todos ? 'Remover todos' : 'Selecionar todos'"></v-checkbox>
         <v-list dense>
             <v-virtual-scroll :items="computed_items" :item-height="50" height="400">
             <template v-slot:default="{ item }">

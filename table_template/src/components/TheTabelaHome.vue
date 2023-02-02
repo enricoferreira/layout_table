@@ -51,11 +51,19 @@
 
             <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Perfil"
               :value_prop="'perfil_nome'" :value_selected="'perfil_selected'" :items="usuarios" :value_array_selected="perfil_selected" />
+
+            <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Últ acesso"
+            :value_prop="'data_ult_acesso'" :value_selected="'ult_acesso_selected'" :items="usuarios" :value_array_selected="ult_acesso_selected" />
             
-            <th class="text-center white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
-    top: 3px;">Últ Acesso</th>
-            <th class="text-center white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
-    top: 3px;">Qtd Acesso</th>
+            <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Qtd Acesso"
+            :value_prop="'qtd_acesso'" :value_selected="'qtd_acesso_selected'" :items="usuarios" :value_array_selected="qtd_acesso_selected" />
+
+            <!-- <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Últ acesso"
+            :value_prop="'data_ult_acesso'" :value_selected="'ult_acesso_selected'" :items="usuarios" :value_array_selected="ult_acesso_selected" />
+
+            <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Últ acesso"
+            :value_prop="'data_ult_acesso'" :value_selected="'ult_acesso_selected'" :items="usuarios" :value_array_selected="ult_acesso_selected" />
+             -->
             <th class="text-center white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
     top: 3px;">Liberado/ bloq</th>
             <th class="text-center white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
@@ -67,9 +75,9 @@
             <td class="text-left py-2 px-2 text-truncate" style="max-width: 200px;width: 200px">{{usu.name}}</td>
             <td class="text-left py-2 px-2 text-truncate" style="max-width: 200px;width: 200px">{{usu.email}}</td>
             <td class="text-left py-2 px-2 text-truncate" style="max-width: 150px;width: 150px">{{usu.cargo}}</td>
-            <td class="text-left py-2 px-2" style="min-width: 97px">{{usu.perfil_nome}}</td>
-            <td class="text-center py-2 px-2">{{usu.data_ult_acesso | format_date}}</td>
-            <td class="text-center py-2 px-2">{{usu.qtd_acesso}}</td>
+            <td class="text-left py-2 px-2 text-truncate" style="min-width: 97px">{{usu.perfil_nome}}</td>
+            <td class="text-center py-2 px-2" style="min-width: 137px">{{usu.data_ult_acesso | format_date}}</td>
+            <td class="text-center py-2 px-2" style="min-width: 137px">{{usu.qtd_acesso}}</td>
             <td class="text-center py-2 px-2" @click.stop="usu.status_acesso = !usu.status_acesso">
               <input :checked="usu.status_acesso == 1" type="checkbox" name="" id="" :value="usu.status_acessso">
               <!-- <div class="d-flex justify-center" style="width: 100%">
@@ -104,13 +112,18 @@ import usuarios from '../api/usuarios'
     name: 'HelloWorld',
     filters: {
       format_date(date){
-        return moment(date).format('DD/MM/YY')
+        return moment(date).format('DD/MM/YY HH:mm')
       }
     },
     computed:{
       usuarios_computed_filter(){
         return this.usuarios.filter(usu => {
-          return this.nomes_selected.includes(usu.name) && this.email_selected.includes(usu.email) && this.cargos_selected.includes(usu.cargo) && this.perfil_selected.includes(usu.perfil_nome)
+          return this.nomes_selected.includes(usu.name) &&
+          this.email_selected.includes(usu.email) &&
+          this.cargos_selected.includes(usu.cargo) &&
+          this.perfil_selected.includes(usu.perfil_nome) &&
+          this.ult_acesso_selected.includes(usu.data_ult_acesso) &&
+          this.qtd_acesso_selected.includes(usu.qtd_acesso)
         }).sort((a, b) => {
           const a_format = a[this.ordenacao_value]
           const b_format = b[this.ordenacao_value]
@@ -161,6 +174,8 @@ import usuarios from '../api/usuarios'
       nomes_selected: [...new Set(usuarios.map(usu => usu.name))],
       cargos_selected: [...new Set(usuarios.map(usu => usu.cargo))],
       perfil_selected: [...new Set(usuarios.map(usu => usu.perfil_nome))],
+      ult_acesso_selected: [...new Set(usuarios.map(usu => usu.data_ult_acesso))],
+      qtd_acesso_selected: [...new Set(usuarios.map(usu => usu.qtd_acesso))],
       
       // Ordenacao
       ordenacao_value: '',
