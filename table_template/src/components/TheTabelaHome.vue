@@ -58,16 +58,11 @@
             <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Qtd Acesso"
             :value_prop="'qtd_acesso'" :value_selected="'qtd_acesso_selected'" :items="usuarios" :value_array_selected="qtd_acesso_selected" />
 
-            <!-- <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Últ acesso"
-            :value_prop="'data_ult_acesso'" :value_selected="'ult_acesso_selected'" :items="usuarios" :value_array_selected="ult_acesso_selected" />
-
-            <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Últ acesso"
-            :value_prop="'data_ult_acesso'" :value_selected="'ult_acesso_selected'" :items="usuarios" :value_array_selected="ult_acesso_selected" />
-             -->
             <th class="text-center white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
     top: 3px;">Liberado/ bloq</th>
-            <th class="text-center white py-2 px-2" style="color: #474747; font-size: 16px;position: sticky;
-    top: 3px;">Lojas</th>
+    
+            <TH @addFilter="addFilter" @ordenar="ordenar" @toggleTodos="toggleTodos" :ordenacao_sentido="ordenacao_sentido" :ordenacao_value="ordenacao_value" nome_coluna="Lojas"
+            :value_prop="'num_permissao'" :value_selected="'num_permissao_selected'" :items="usuarios" :value_array_selected="num_permissao_selected" />
           </tr>
         </thead>
         <tbody>
@@ -123,7 +118,7 @@ import usuarios from '../api/usuarios'
           this.cargos_selected.includes(usu.cargo) &&
           this.perfil_selected.includes(usu.perfil_nome) &&
           this.ult_acesso_selected.includes(usu.data_ult_acesso) &&
-          this.qtd_acesso_selected.includes(usu.qtd_acesso)
+          this.num_permissao_selected.includes(usu.num_permissao)
         }).sort((a, b) => {
           const a_format = a[this.ordenacao_value]
           const b_format = b[this.ordenacao_value]
@@ -176,7 +171,7 @@ import usuarios from '../api/usuarios'
       perfil_selected: [...new Set(usuarios.map(usu => usu.perfil_nome))],
       ult_acesso_selected: [...new Set(usuarios.map(usu => usu.data_ult_acesso))],
       qtd_acesso_selected: [...new Set(usuarios.map(usu => usu.qtd_acesso))],
-      
+      num_permissao_selected: [...new Set(usuarios.map(usu => usu.num_permissao))],
       // Ordenacao
       ordenacao_value: '',
       ordenacao_sentido: 'cresc',
