@@ -110,7 +110,7 @@ import usuarios from '../api/usuarios'
     computed:{
       usuarios_computed_filter(){
         return this.usuarios.filter(usu => {
-          return this.nomes_selected.includes(usu.name) && this.email_selected.includes(usu.email)
+          return this.nomes_selected.includes(usu.name) && this.email_selected.includes(usu.email) && this.cargos_selected.includes(usu.cargo) && this.perfil_selected.includes(usu.perfil_nome)
         }).sort((a, b) => {
           const a_format = a[this.ordenacao_value]
           const b_format = b[this.ordenacao_value]
@@ -139,12 +139,12 @@ import usuarios from '../api/usuarios'
       },
       addFilter(item, value_selected, value_prop){
         const index_find = this[value_selected].findIndex(item_v => {
-          return item_v == item[value_prop]
+          return item_v == item
         });
         if(index_find != -1){
           this[value_selected].splice(index_find, 1)
         }else{
-          this[value_selected].push(item[value_prop])
+          this[value_selected].push(item)
         }
       },
       activeShadow(e){

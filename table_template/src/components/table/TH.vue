@@ -22,7 +22,7 @@
             <template v-slot:default="{ item }">
                 <v-list-item @click="addFilter(item)">
                 <v-list-item-content>
-                    <v-list-item-title>{{ item[value_prop] }}</v-list-item-title>
+                    <v-list-item-title>{{ item }}</v-list-item-title>
                 </v-list-item-content>
                 <v-list-item-action class="d-flex justify-center">
                     <input @click.prevent="addFilter(item)" type="checkbox" name="" id="" :checked="isChecked(item)">
@@ -48,7 +48,7 @@ export default {
     },
     methods: {
         isChecked(item){
-            return this.value_array_selected.includes(item[this.value_prop])
+            return this.value_array_selected.includes(item)
         },
         ordenar(value, sentido){
             this.$emit('ordenar', value, sentido)
@@ -63,13 +63,29 @@ export default {
                 this.$emit('toggleTodos',this.selecionar_todos, this.value_selected, this.value_prop)
             }
         },
+        validItem(item){
+            return (item[this.value_prop] != null && item[this.value_prop] != '')
+        }
     },
     computed: {
         computed_items(){
-            return [...new Set(this.items.filter(item => {
+            return [...new Set(this.items.map(item => item[this.value_prop])
+                .filter(item => {
+                    return this.search == '' ? true : item.toLowerCase().includes(this.search.toLowerCase())
+                }))]
+            const filtrados = Array.from(new Set(this.items.map(item => item[this.value_prop])))
+                .map(item => {
+                    return this.items.find(i_v => {
+                        return item == i_v[this.value_prop]
+                    })
+                })
+            return [...new Set(filtrados.filter(item => {
+                if(!this.validItem(item)){
+                    return false
+                }
                 return this.search == '' ? true : item[this.value_prop].toLowerCase().includes(this.search.toLowerCase())
             }))]
-        }
+        },
     }
 }
 </script>
