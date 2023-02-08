@@ -1,15 +1,15 @@
 <template>
-  <hello-world />
+  <TheTabela />
 </template>
 
 <script>
-  import HelloWorld from '../components/TheTabelaHome'
+  import TheTabela from '../components/TheTabelaHome'
 
   export default {
     name: 'Home',
 
     components: {
-      HelloWorld,
+      TheTabela,
     },
   }
 </script>

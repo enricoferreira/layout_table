@@ -41,6 +41,11 @@ export default {
                         icon: 'mdi-briefcase',
                         to: 'about'
                     },
+                    {
+                        title: 'Escala',
+                        icon: 'mdi-calendar',
+                        to: 'escala'
+                    },
                 ],
                 right: null,
         }

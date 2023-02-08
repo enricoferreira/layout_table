@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <!-- <TheAppBar/> -->
     <TheNavDrawer/>
     <v-main style="">
       <router-view/>
@@ -9,12 +8,10 @@
 </template>
 
 <script>
-import TheAppBar from '../src/components/TheAppBar.vue'
 import TheNavDrawer from '../src/components/TheNavDrawer.vue'
 export default {
   name: 'App',
   components:{
-    TheAppBar,
     TheNavDrawer
   },
   data: () => ({
